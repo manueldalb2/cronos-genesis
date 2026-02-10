@@ -95,6 +95,7 @@ import (
 	"cosmossdk.io/x/upgrade"
 	upgradekeeper "cosmossdk.io/x/upgrade/keeper"
 	upgradetypes "cosmossdk.io/x/upgrade/types"
+        sdkmath "cosmossdk.io/math"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -201,7 +202,6 @@ func getGovProposalHandlers() []govclient.ProposalHandler {
 var (
 	// DefaultNodeHome default home directories for the application daemon
 	DefaultNodeHome string
-        sdk.DefaultPowerReduction = sdk.NewIntFromUint64(1000000000000000000)
 
 	// module account permissions
 	maccPerms = map[string][]string{
@@ -229,6 +229,7 @@ func init() {
 	}
 
 	DefaultNodeHome = filepath.Join(userHomeDir, "."+Name)
+        sdk.DefaultPowerReduction = sdkmath.NewIntFromUint64(1000000000000000000)
 }
 
 func StoreKeys() (
