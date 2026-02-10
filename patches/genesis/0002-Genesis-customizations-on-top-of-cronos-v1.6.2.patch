@@ -1,0 +1,87 @@
+From 787a302c1b4aa8b87cc07761588e1918de718a63 Mon Sep 17 00:00:00 2001
+From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
+Date: Tue, 10 Feb 2026 19:43:06 +0000
+Subject: [PATCH 02/10] Genesis customizations on top of cronos v1.6.2
+
+---
+ app/app.go                      |  3 ++-
+ x/cronos/types/messages_test.go | 12 ++++++------
+ 2 files changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/app/app.go b/app/app.go
+index 8ba84440..0e68dc7e 100644
+--- a/app/app.go
++++ b/app/app.go
+@@ -95,6 +95,7 @@ import (
+ 	"cosmossdk.io/x/upgrade"
+ 	upgradekeeper "cosmossdk.io/x/upgrade/keeper"
+ 	upgradetypes "cosmossdk.io/x/upgrade/types"
++        sdkmath "cosmossdk.io/math"
+ 
+ 	"github.com/cosmos/cosmos-sdk/baseapp"
+ 	"github.com/cosmos/cosmos-sdk/client"
+@@ -201,7 +202,6 @@ func getGovProposalHandlers() []govclient.ProposalHandler {
+ var (
+ 	// DefaultNodeHome default home directories for the application daemon
+ 	DefaultNodeHome string
+-        sdk.DefaultPowerReduction = sdk.NewIntFromUint64(1000000000000000000)
+ 
+ 	// module account permissions
+ 	maccPerms = map[string][]string{
+@@ -229,6 +229,7 @@ func init() {
+ 	}
+ 
+ 	DefaultNodeHome = filepath.Join(userHomeDir, "."+Name)
++        sdk.DefaultPowerReduction = sdkmath.NewIntFromUint64(1000000000000000000)
+ }
+ 
+ func StoreKeys() (
+diff --git a/x/cronos/types/messages_test.go b/x/cronos/types/messages_test.go
+index 5e4d6520..d0c85087 100644
+--- a/x/cronos/types/messages_test.go
++++ b/x/cronos/types/messages_test.go
+@@ -24,27 +24,27 @@ func TestValidateMsgUpdateTokenMapping(t *testing.T) {
+ 	}{
+ 		{
+ 			"valid gravity denom",
+-			types.NewMsgUpdateTokenMapping("crc12luku6uxehhak02py4rcz65zu0swh7wjsrw0pp", "gravity0x6E7eef2b30585B2A4D45Ba9312015d5354FDB067", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
++			types.NewMsgUpdateTokenMapping("genesis1prp77nemc7jpyquyd0ht2zwxftqr9jfu7xcp4v", "gravity0x6E7eef2b30585B2A4D45Ba9312015d5354FDB067", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
+ 			true,
+ 		},
+ 		{
+ 			"valid ibc denom",
+-			types.NewMsgUpdateTokenMapping("crc12luku6uxehhak02py4rcz65zu0swh7wjsrw0pp", "ibc/0000000000000000000000000000000000000000000000000000000000000000", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
++			types.NewMsgUpdateTokenMapping("genesis1prp77nemc7jpyquyd0ht2zwxftqr9jfu7xcp4v", "ibc/0000000000000000000000000000000000000000000000000000000000000000", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
+ 			true,
+ 		},
+ 		{
+ 			"invalid sender",
+-			types.NewMsgUpdateTokenMapping("crc12luku6uxehhak02py4r", "gravity0x6E7eef2b30585B2A4D45Ba9312015d5354FDB067", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
++			types.NewMsgUpdateTokenMapping("genesis1prp77nemc7jpyquyd0h", "gravity0x6E7eef2b30585B2A4D45Ba9312015d5354FDB067", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
+ 			false,
+ 		},
+ 		{
+ 			"invalid denom",
+-			types.NewMsgUpdateTokenMapping("crc12luku6uxehhak02py4rcz65zu0swh7wjsrw0pp", "aaa", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
++			types.NewMsgUpdateTokenMapping("genesis1prp77nemc7jpyquyd0ht2zwxftqr9jfu7xcp4v", "aaa", "0x57f96e6B86CdeFdB3d412547816a82E3E0EbF9D2", "", 0),
+ 			false,
+ 		},
+ 		{
+ 			"invalid contract address",
+-			types.NewMsgUpdateTokenMapping("crc12luku6uxehhak02py4rcz65zu0swh7wjsrw0pp", "gravity0x6E7eef2b30585B2A4D45Ba9312015d5354FDB067", "0x57f96e6B86CdeFdB3d4125", "", 0),
++			types.NewMsgUpdateTokenMapping("genesis1prp77nemc7jpyquyd0ht2zwxftqr9jfu7xcp4v", "gravity0x6E7eef2b30585B2A4D45Ba9312015d5354FDB067", "0x57f96e6B86CdeFdB3d4125", "", 0),
+ 			false,
+ 		},
+ 	}
+@@ -69,7 +69,7 @@ func TestValidateMsgStoreBlockList(t *testing.T) {
+ 		log.Fatalf("Failed to parse public key %q: %v", publicKey, err)
+ 	}
+ 
+-	from := "crc12luku6uxehhak02py4rcz65zu0swh7wjsrw0pp"
++	from := "genesis1prp77nemc7jpyquyd0ht2zwxftqr9jfu7xcp4v"
+ 	blob := []byte("valid blob data")
+ 	testCases := []struct {
+ 		name        string
+-- 
+2.25.1
+
