@@ -105,10 +105,10 @@ endif
 
 all: build
 build: check-network print-ledger go.sum
-        @go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/$(BINARY_NAME) ./cmd/cronosd
+	@go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/$(BINARY_NAME) ./cmd/cronosd
 
 install: check-network print-ledger go.sum
-        @go build -mod=readonly $(BUILD_FLAGS)  -o $${GOBIN:-$$(go env GOPATH)/bin}/$(BINARY_NAME) ./cmd/cronosd
+	@go build -mod=readonly $(BUILD_FLAGS)  -o $${GOBIN:-$$(go env GOPATH)/bin}/$(BINARY_NAME) ./cmd/cronosd
 
 test: test-memiavl test-store
 	@go test -tags=objstore -v -mod=readonly $(PACKAGES) -coverprofile=$(COVERAGE) -covermode=atomic
