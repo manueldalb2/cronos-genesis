@@ -1,7 +1,7 @@
 From ba092ec170ad9c2df84c0074f9993966b6107bfe Mon Sep 17 00:00:00 2001
 From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
 Date: Tue, 10 Feb 2026 20:09:12 +0000
-Subject: [PATCH 4/5] genesis: add v1.6.2 upgrade handler and store migrations
+Subject: [PATCH 4/6] genesis: add v1.6.2 upgrade handler and store migrations
 
 ---
  app/upgrades.go | 66 ++++++++++++++++++++++++++++++++++++++++++++++---

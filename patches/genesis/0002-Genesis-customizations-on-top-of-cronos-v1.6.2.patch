@@ -1,7 +1,7 @@
 From 787a302c1b4aa8b87cc07761588e1918de718a63 Mon Sep 17 00:00:00 2001
 From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
 Date: Tue, 10 Feb 2026 19:43:06 +0000
-Subject: [PATCH 2/5] Genesis customizations on top of cronos v1.6.2
+Subject: [PATCH 2/6] Genesis customizations on top of cronos v1.6.2
 
 ---
  app/app.go                      |  3 ++-

@@ -1,7 +1,7 @@
 From ed4c13d831f68c60d293f837e726905010bb2194 Mon Sep 17 00:00:00 2001
 From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
 Date: Tue, 10 Feb 2026 19:47:03 +0000
-Subject: [PATCH 3/5] Genesis patch series for cronos v1.6.2
+Subject: [PATCH 3/6] Genesis patch series for cronos v1.6.2
 
 ---
  ...stomizations-on-top-of-cronos-v1.6.2.patch | 3556 +++++++++++++++++

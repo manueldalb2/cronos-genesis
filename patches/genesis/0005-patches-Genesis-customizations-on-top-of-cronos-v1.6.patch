@@ -1,7 +1,7 @@
 From 9edab611faa9d2669ec33466d0d0bfc5b6594390 Mon Sep 17 00:00:00 2001
 From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
 Date: Tue, 10 Feb 2026 20:13:45 +0000
-Subject: [PATCH 5/5] patches: Genesis customizations on top of cronos v1.6.2
+Subject: [PATCH 5/6] patches: Genesis customizations on top of cronos v1.6.2
 
 ---
  ...stomizations-on-top-of-cronos-v1.6.2.patch |    2 +-
