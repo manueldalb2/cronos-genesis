@@ -10,7 +10,8 @@ PROJECT_NAME = $(shell git remote get-url origin | xargs basename -s .git)
 
 TESTNET_FLAGS ?=
 
-VERSION := $(shell echo $(shell git describe --tags 2>/dev/null ) | sed 's/^v//')
+#VERSION := $(shell echo $(shell git describe --tags 2>/dev/null ) | sed 's/^v//')
+VERSION := $(shell git describe --tags --match 'genesis-v*' --abbrev=0 | sed 's/^genesis-//')
 COMMIT := $(shell git log -1 --format='%H')
 DOCKER := $(shell which docker)
 
@@ -104,10 +105,10 @@ endif
 
 all: build
 build: check-network print-ledger go.sum
-	@go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/$(BINARY_NAME) ./cmd/$(BINARY_NAME)
+        @go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/$(BINARY_NAME) ./cmd/cronosd
 
 install: check-network print-ledger go.sum
-	@go install -mod=readonly $(BUILD_FLAGS) ./cmd/$(BINARY_NAME)
+        @go build -mod=readonly $(BUILD_FLAGS)  -o $${GOBIN:-$$(go env GOPATH)/bin}/$(BINARY_NAME) ./cmd/cronosd
 
 test: test-memiavl test-store
 	@go test -tags=objstore -v -mod=readonly $(PACKAGES) -coverprofile=$(COVERAGE) -covermode=atomic
