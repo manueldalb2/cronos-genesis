@@ -243,7 +243,7 @@ def test_statesync(cronos):
     # We can only create a new node with statesync config
     data = Path(cronos.base_dir).parent  # Same data dir as cronos fixture
     chain_id = cronos.config["chain_id"]  # Same chain_id as cronos fixture
-    cmd = "cronosd"
+    cmd = "genesisd"
     # create a clustercli object from ClusterCLI class
     clustercli = cluster.ClusterCLI(data, cmd=cmd, chain_id=chain_id)
     # create a new node with statesync enabled

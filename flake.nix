@@ -48,15 +48,15 @@
           inherit (pkgs) rocksdb testground-image;
         };
         apps = {
-          cronosd = mkApp packages.cronosd;
-          cronosd-testnet = mkApp packages.cronosd-testnet;
+          genesisd = mkApp packages.genesisd;
+          genesisd-testnet = mkApp packages.genesisd-testnet;
           stateless-testcase = {
             type = "app";
             program = "${pkgs.benchmark-testcase}/bin/stateless-testcase";
           };
         };
-        defaultPackage = packages.cronosd;
-        defaultApp = apps.cronosd;
+        defaultPackage = packages.genesisd;
+        defaultApp = apps.genesisd;
         devShells = rec {
           default = pkgs.mkShell {
             buildInputs = [

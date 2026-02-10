@@ -1,7 +1,7 @@
 {
   dotenv: '../../scripts/.env',
   'cronos_777-1': {
-    cmd: 'cronosd',
+    cmd: 'genesisd',
     'start-flags': '--trace',
     config: {
       db_backend: 'rocksdb',

@@ -74,7 +74,7 @@ def post_init(path, base_port, config):
         lambda i, _: {
             "command": f"cosmovisor run start --home %(here)s/node{i}",
             "environment": (
-                "DAEMON_NAME=cronosd,"
+                "DAEMON_NAME=genesisd,"
                 "DAEMON_SHUTDOWN_GRACE=1m,"
                 "UNSAFE_SKIP_BACKUP=true,"
                 f"DAEMON_HOME=%(here)s/node{i}"
@@ -110,7 +110,7 @@ def setup_cronos_test(tmp_path_factory):
         port,
         configdir / f"configs/{cfg_name}.jsonnet",
         post_init=post_init,
-        chain_binary=str(upgrades / "genesis/bin/cronosd"),
+        chain_binary=str(upgrades / "genesis/bin/genesisd"),
     ) as cronos:
         yield cronos
 
@@ -209,7 +209,7 @@ def exec(c, tmp_path_factory):
 
         # update cli chain binary
         c.chain_binary = (
-            Path(c.chain_binary).parent.parent.parent / f"{plan_name}/bin/cronosd"
+            Path(c.chain_binary).parent.parent.parent / f"{plan_name}/bin/genesisd"
         )
         # block should pass the target height
         wait_for_block(c.cosmos_cli(), target + 2, timeout=480)

@@ -164,7 +164,7 @@ import (
 )
 
 const (
-	Name = "cronos"
+	Name = "genesis"
 
 	// AddrLen is the allowed length (in bytes) for an address.
 	//
@@ -201,6 +201,7 @@ func getGovProposalHandlers() []govclient.ProposalHandler {
 var (
 	// DefaultNodeHome default home directories for the application daemon
 	DefaultNodeHome string
+        sdk.DefaultPowerReduction = sdk.NewIntFromUint64(1000000000000000000)
 
 	// module account permissions
 	maccPerms = map[string][]string{

@@ -44,10 +44,10 @@ def custom_cronos(tmp_path_factory):
     cmd = [
         "nix-build",
         "--no-out-link",
-        Path(__file__).parent / "configs/broken-cronosd.nix",
+        Path(__file__).parent / "configs/broken-genesisd.nix",
     ]
     print(*cmd)
-    broken_binary = Path(subprocess.check_output(cmd).strip().decode()) / "bin/cronosd"
+    broken_binary = Path(subprocess.check_output(cmd).strip().decode()) / "bin/genesisd"
     print(broken_binary)
 
     # init with genesis binary
@@ -95,7 +95,7 @@ def test_rollback(custom_cronos):
         cli.rollback()
 
         print("switch to normal binary")
-        update_node_cmd(custom_cronos.base_dir, "cronosd", i)
+        update_node_cmd(custom_cronos.base_dir, "genesisd", i)
 
     supervisorctl(custom_cronos.base_dir / "../tasks.ini", "update")
 

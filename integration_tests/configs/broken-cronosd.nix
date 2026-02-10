@@ -2,8 +2,8 @@
   pkgs ? import ../../nix { },
 }:
 let
-  cronosd = (pkgs.callPackage ../../. { });
+  genesisd = (pkgs.callPackage ../../. { });
 in
-cronosd.overrideAttrs (oldAttrs: {
-  patches = oldAttrs.patches or [ ] ++ [ ./broken-cronosd.patch ];
+genesisd.overrideAttrs (oldAttrs: {
+  patches = oldAttrs.patches or [ ] ++ [ ./broken-genesisd.patch ];
 })
