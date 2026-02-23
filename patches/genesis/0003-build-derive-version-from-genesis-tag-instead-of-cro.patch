@@ -1,15 +1,15 @@
 From 5c3fc9becb1a80c68a1390a738c13b6fb03e5af2 Mon Sep 17 00:00:00 2001
 From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
 Date: Tue, 10 Feb 2026 20:41:40 +0000
-Subject: [PATCH 08/10] build: derive version from genesis tag instead of
- cronos tag
+Subject: [PATCH 3/3] build: derive version from genesis tag instead of cronos
+ tag
 
 ---
  Makefile | 7 ++++---
  1 file changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 9a9d4b79..5932c61a 100644
+index 9a9d4b7..5932c61 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -10,7 +10,8 @@ PROJECT_NAME = $(shell git remote get-url origin | xargs basename -s .git)
@@ -36,5 +36,5 @@ index 9a9d4b79..5932c61a 100644
  test: test-memiavl test-store
  	@go test -tags=objstore -v -mod=readonly $(PACKAGES) -coverprofile=$(COVERAGE) -covermode=atomic
 -- 
-2.25.1
+2.43.0
 
