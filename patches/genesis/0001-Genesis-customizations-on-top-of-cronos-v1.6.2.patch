@@ -1,7 +1,7 @@
 From 6f796848f0c801babaa21df8df3a9ea9494cb31e Mon Sep 17 00:00:00 2001
 From: StakeandRelax-Validator <stakeandrelax_validator@proton.me>
 Date: Tue, 10 Feb 2026 19:28:36 +0000
-Subject: [PATCH 01/10] Genesis customizations on top of cronos v1.6.2
+Subject: [PATCH 1/1] Genesis customizations on top of cronos v1.6.2
 
 ---
  .github/workflows/build.yml                  |   2 +-
@@ -97,7 +97,7 @@ Subject: [PATCH 01/10] Genesis customizations on top of cronos v1.6.2
  create mode 100644 utils/tools/restate-sync.sh
 
 diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
-index 244cab63..a6b3489b 100644
+index 244cab6..a6b3489 100644
 --- a/.github/workflows/build.yml
 +++ b/.github/workflows/build.yml
 @@ -44,7 +44,7 @@ jobs:
@@ -110,7 +110,7 @@ index 244cab63..a6b3489b 100644
            if-no-files-found: ignore
  
 diff --git a/Makefile b/Makefile
-index 57149dd7..9a9d4b79 100644
+index 57149dd..9a9d4b7 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,7 +1,7 @@
@@ -165,7 +165,7 @@ index 57149dd7..9a9d4b79 100644
 \ No newline at end of file
 +	$(BUILDDIR)/govulncheck ./...
 diff --git a/README.md b/README.md
-index a71eb126..06552b3e 100644
+index a71eb12..06552b3 100644
 --- a/README.md
 +++ b/README.md
 @@ -1,173 +1,456 @@
@@ -726,7 +726,7 @@ index a71eb126..06552b3e 100644
 +- [@Zenodeapp](https://github.com/Zenodeapp) — for reviewing these instructions and optimizing the required scripting.
 +- [@Cordtus](https://github.com/Cordtus) — for hosting and maintaining the FTP server for snapshot distribution.
 diff --git a/app/app.go b/app/app.go
-index c5387bba..8ba84440 100644
+index c5387bb..8ba8444 100644
 --- a/app/app.go
 +++ b/app/app.go
 @@ -164,7 +164,7 @@ import (
@@ -748,7 +748,7 @@ index c5387bba..8ba84440 100644
  	maccPerms = map[string][]string{
 diff --git a/assets/cronos.svg b/assets/cronos.svg
 deleted file mode 100644
-index 76cf3aab..00000000
+index 76cf3aa..0000000
 --- a/assets/cronos.svg
 +++ /dev/null
 @@ -1,22 +0,0 @@
@@ -775,7 +775,7 @@ index 76cf3aab..00000000
 -</defs>
 -</svg>
 diff --git a/cmd/cronosd/cmd/root.go b/cmd/cronosd/cmd/root.go
-index 8c767f09..a58b4e7f 100644
+index 8c767f0..a58b4e7 100644
 --- a/cmd/cronosd/cmd/root.go
 +++ b/cmd/cronosd/cmd/root.go
 @@ -88,7 +88,7 @@ func NewRootCmd() *cobra.Command {
@@ -788,7 +788,7 @@ index 8c767f09..a58b4e7f 100644
  			// set the default command outputs
  			cmd.SetOut(cmd.OutOrStdout())
 diff --git a/cmd/cronosd/config/prefix_mainnet.go b/cmd/cronosd/config/prefix_mainnet.go
-index 97b97d04..e48ddb58 100644
+index 97b97d0..e48ddb5 100644
 --- a/cmd/cronosd/config/prefix_mainnet.go
 +++ b/cmd/cronosd/config/prefix_mainnet.go
 @@ -7,7 +7,7 @@ import sdk "github.com/cosmos/cosmos-sdk/types"
@@ -801,7 +801,7 @@ index 97b97d04..e48ddb58 100644
  	// Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
  	Bech32PrefixAccAddr = Bech32Prefix
 diff --git a/cmd/cronosd/config/prefix_testnet.go b/cmd/cronosd/config/prefix_testnet.go
-index 8628e4c0..379f909a 100644
+index 8628e4c..379f909 100644
 --- a/cmd/cronosd/config/prefix_testnet.go
 +++ b/cmd/cronosd/config/prefix_testnet.go
 @@ -7,7 +7,7 @@ import sdk "github.com/cosmos/cosmos-sdk/types"
@@ -815,7 +815,7 @@ index 8628e4c0..379f909a 100644
  	Bech32PrefixAccAddr = Bech32Prefix
 diff --git a/configs/default_app.toml b/configs/default_app.toml
 new file mode 100644
-index 00000000..d0068e65
+index 0000000..d0068e6
 --- /dev/null
 +++ b/configs/default_app.toml
 @@ -0,0 +1,374 @@
@@ -1195,7 +1195,7 @@ index 00000000..d0068e65
 +cache-size = 1000
 diff --git a/configs/default_config.toml b/configs/default_config.toml
 new file mode 100644
-index 00000000..af9ef891
+index 0000000..af9ef89
 --- /dev/null
 +++ b/configs/default_config.toml
 @@ -0,0 +1,471 @@
@@ -1671,7 +1671,7 @@ index 00000000..af9ef891
 +# Instrumentation namespace
 +namespace = "cometbft"
 diff --git a/default.nix b/default.nix
-index b64ab7ca..d3d4ea86 100644
+index b64ab7c..d3d4ea8 100644
 --- a/default.nix
 +++ b/default.nix
 @@ -12,7 +12,7 @@
@@ -1721,7 +1721,7 @@ index b64ab7ca..d3d4ea86 100644
    };
  }
 diff --git a/flake.nix b/flake.nix
-index 5c143a6c..bf1921ec 100644
+index 5c143a6..bf1921e 100644
 --- a/flake.nix
 +++ b/flake.nix
 @@ -48,15 +48,15 @@
@@ -1745,7 +1745,7 @@ index 5c143a6c..bf1921ec 100644
            default = pkgs.mkShell {
              buildInputs = [
 diff --git a/integration_tests/configs/broken-cronosd.nix b/integration_tests/configs/broken-cronosd.nix
-index 50876127..41fae83e 100644
+index 5087612..41fae83 100644
 --- a/integration_tests/configs/broken-cronosd.nix
 +++ b/integration_tests/configs/broken-cronosd.nix
 @@ -2,8 +2,8 @@
@@ -1761,7 +1761,7 @@ index 50876127..41fae83e 100644
 +  patches = oldAttrs.patches or [ ] ++ [ ./broken-genesisd.patch ];
  })
 diff --git a/integration_tests/configs/default.jsonnet b/integration_tests/configs/default.jsonnet
-index b7394db9..acffcdf4 100644
+index b7394db..acffcdf 100644
 --- a/integration_tests/configs/default.jsonnet
 +++ b/integration_tests/configs/default.jsonnet
 @@ -1,7 +1,7 @@
@@ -1774,7 +1774,7 @@ index b7394db9..acffcdf4 100644
      config: {
        db_backend: 'rocksdb',
 diff --git a/integration_tests/network.py b/integration_tests/network.py
-index db846e0a..7b6066ff 100644
+index db846e0..7b6066f 100644
 --- a/integration_tests/network.py
 +++ b/integration_tests/network.py
 @@ -14,7 +14,7 @@ from .utils import supervisorctl, w3_wait_for_block, wait_for_port
@@ -1796,7 +1796,7 @@ index db846e0a..7b6066ff 100644
          yield c
      finally:
 diff --git a/integration_tests/shell.nix b/integration_tests/shell.nix
-index 4eb582cc..52327cfd 100644
+index 4eb582c..52327cf 100644
 --- a/integration_tests/shell.nix
 +++ b/integration_tests/shell.nix
 @@ -4,7 +4,7 @@
@@ -1809,7 +1809,7 @@ index 4eb582cc..52327cfd 100644
      pkgs.go-ethereum
      pkgs.go
 diff --git a/integration_tests/test_basic.py b/integration_tests/test_basic.py
-index c472670b..5c9301d7 100644
+index c472670..5c9301d 100644
 --- a/integration_tests/test_basic.py
 +++ b/integration_tests/test_basic.py
 @@ -243,7 +243,7 @@ def test_statesync(cronos):
@@ -1822,7 +1822,7 @@ index c472670b..5c9301d7 100644
      clustercli = cluster.ClusterCLI(data, cmd=cmd, chain_id=chain_id)
      # create a new node with statesync enabled
 diff --git a/integration_tests/test_rollback.py b/integration_tests/test_rollback.py
-index 040de7a7..006cbb49 100644
+index 040de7a..006cbb4 100644
 --- a/integration_tests/test_rollback.py
 +++ b/integration_tests/test_rollback.py
 @@ -44,10 +44,10 @@ def custom_cronos(tmp_path_factory):
@@ -1848,7 +1848,7 @@ index 040de7a7..006cbb49 100644
      supervisorctl(custom_cronos.base_dir / "../tasks.ini", "update")
  
 diff --git a/integration_tests/test_upgrade.py b/integration_tests/test_upgrade.py
-index ebf43b34..608d0e9a 100644
+index ebf43b3..608d0e9 100644
 --- a/integration_tests/test_upgrade.py
 +++ b/integration_tests/test_upgrade.py
 @@ -74,7 +74,7 @@ def post_init(path, base_port, config):
@@ -1879,7 +1879,7 @@ index ebf43b34..608d0e9a 100644
          # block should pass the target height
          wait_for_block(c.cosmos_cli(), target + 2, timeout=480)
 diff --git a/integration_tests/utils.py b/integration_tests/utils.py
-index 942f3041..3d8ee036 100644
+index 942f304..3d8ee03 100644
 --- a/integration_tests/utils.py
 +++ b/integration_tests/utils.py
 @@ -603,7 +603,7 @@ def modify_command_in_supervisor_config(ini: Path, fn, **kwargs):
@@ -1892,7 +1892,7 @@ index 942f3041..3d8ee036 100644
              ini.read_text(),
              flags=re.M,
 diff --git a/scripts/codesign_macos.sh b/scripts/codesign_macos.sh
-index ac43e87d..2c22de36 100755
+index ac43e87..2c22de3 100755
 --- a/scripts/codesign_macos.sh
 +++ b/scripts/codesign_macos.sh
 @@ -8,7 +8,7 @@ TMPD=$(mktemp -d)
@@ -1905,7 +1905,7 @@ index ac43e87d..2c22de36 100755
  echo "Archive"
  WORKDIR=$PWD
 diff --git a/scripts/cronos-devnet.yaml b/scripts/cronos-devnet.yaml
-index 5c993161..69f398d5 100644
+index 5c99316..69f398d 100644
 --- a/scripts/cronos-devnet.yaml
 +++ b/scripts/cronos-devnet.yaml
 @@ -1,6 +1,6 @@
@@ -1917,7 +1917,7 @@ index 5c993161..69f398d5 100644
    app-config:
      minimum-gas-prices: 0basetcro
 diff --git a/scripts/release.sh b/scripts/release.sh
-index 3be3b5a0..0b93cd88 100755
+index 3be3b5a..0b93cd8 100755
 --- a/scripts/release.sh
 +++ b/scripts/release.sh
 @@ -11,7 +11,7 @@ build() {
@@ -1931,7 +1931,7 @@ index 3be3b5a0..0b93cd88 100755
              # static link for linux targets
 diff --git a/services/genesisd.service b/services/genesisd.service
 new file mode 100644
-index 00000000..8be87875
+index 0000000..8be8787
 --- /dev/null
 +++ b/services/genesisd.service
 @@ -0,0 +1,15 @@
@@ -1952,7 +1952,7 @@ index 00000000..8be87875
 +WantedBy=multi-user.target
 diff --git a/services/genesisdrpc.service b/services/genesisdrpc.service
 new file mode 100644
-index 00000000..eac64906
+index 0000000..eac6490
 --- /dev/null
 +++ b/services/genesisdrpc.service
 @@ -0,0 +1,15 @@
@@ -1973,7 +1973,7 @@ index 00000000..eac64906
 +WantedBy=multi-user.target
 diff --git a/setup/README.md b/setup/README.md
 new file mode 100644
-index 00000000..b7b072c3
+index 0000000..b7b072c
 --- /dev/null
 +++ b/setup/README.md
 @@ -0,0 +1,96 @@
@@ -2075,7 +2075,7 @@ index 00000000..b7b072c3
 +```
 diff --git a/setup/create-validator.sh b/setup/create-validator.sh
 new file mode 100644
-index 00000000..d435ced2
+index 0000000..d435ced
 --- /dev/null
 +++ b/setup/create-validator.sh
 @@ -0,0 +1,89 @@
@@ -2171,7 +2171,7 @@ index 00000000..d435ced2
 \ No newline at end of file
 diff --git a/setup/dependencies.sh b/setup/dependencies.sh
 new file mode 100644
-index 00000000..e5d55b05
+index 0000000..e5d55b0
 --- /dev/null
 +++ b/setup/dependencies.sh
 @@ -0,0 +1,36 @@
@@ -2213,7 +2213,7 @@ index 00000000..e5d55b05
 +ulimit -n 50000
 diff --git a/setup/quick-sync.sh b/setup/quick-sync.sh
 new file mode 100644
-index 00000000..606297fc
+index 0000000..606297f
 --- /dev/null
 +++ b/setup/quick-sync.sh
 @@ -0,0 +1,92 @@
@@ -2311,7 +2311,7 @@ index 00000000..606297fc
 +echo "o When ready, turn on your node using '$BINARY_NAME start' or as a service: 'systemctl start $BINARY_NAME' (use 'journalctl -fu $BINARY_NAME -ocat' to see the service logs)."
 diff --git a/setup/state-sync.sh b/setup/state-sync.sh
 new file mode 100644
-index 00000000..3ba41dfe
+index 0000000..3ba41df
 --- /dev/null
 +++ b/setup/state-sync.sh
 @@ -0,0 +1,98 @@
@@ -2415,7 +2415,7 @@ index 00000000..3ba41dfe
 +fi
 diff --git a/setup/upgrade.sh b/setup/upgrade.sh
 new file mode 100644
-index 00000000..97caa2da
+index 0000000..97caa2d
 --- /dev/null
 +++ b/setup/upgrade.sh
 @@ -0,0 +1,91 @@
@@ -2512,14 +2512,14 @@ index 00000000..97caa2da
 +}
 diff --git a/utils/.install/.config b/utils/.install/.config
 new file mode 100644
-index 00000000..5d043115
+index 0000000..5d04311
 --- /dev/null
 +++ b/utils/.install/.config
 @@ -0,0 +1 @@
 +version=main
 diff --git a/utils/.install/.versionmap b/utils/.install/.versionmap
 new file mode 100644
-index 00000000..78cfcf4d
+index 0000000..78cfcf4
 --- /dev/null
 +++ b/utils/.install/.versionmap
 @@ -0,0 +1,20 @@
@@ -2545,7 +2545,7 @@ index 00000000..78cfcf4d
 +LICENSE v1.0.0 a
 diff --git a/utils/.install/_variables.sh.example b/utils/.install/_variables.sh.example
 new file mode 100644
-index 00000000..c3ef7e57
+index 0000000..c3ef7e5
 --- /dev/null
 +++ b/utils/.install/_variables.sh.example
 @@ -0,0 +1,28 @@
@@ -2579,7 +2579,7 @@ index 00000000..c3ef7e57
 +SERVICE_FILE=$BINARY_NAME.service
 diff --git a/utils/.install/updater.sh b/utils/.install/updater.sh
 new file mode 100644
-index 00000000..84010b52
+index 0000000..84010b5
 --- /dev/null
 +++ b/utils/.install/updater.sh
 @@ -0,0 +1,274 @@
@@ -2860,7 +2860,7 @@ index 00000000..84010b52
 \ No newline at end of file
 diff --git a/utils/LICENSE b/utils/LICENSE
 new file mode 100644
-index 00000000..d200b185
+index 0000000..d200b18
 --- /dev/null
 +++ b/utils/LICENSE
 @@ -0,0 +1,21 @@
@@ -2887,7 +2887,7 @@ index 00000000..d200b185
 +SOFTWARE.
 diff --git a/utils/README.md b/utils/README.md
 new file mode 100644
-index 00000000..ab668ad1
+index 0000000..ab668ad
 --- /dev/null
 +++ b/utils/README.md
 @@ -0,0 +1,134 @@
@@ -3027,7 +3027,7 @@ index 00000000..ab668ad1
 +<p align="right">Copyright (c) 2024 ZENODE</p>
 diff --git a/utils/_variables.sh b/utils/_variables.sh
 new file mode 100644
-index 00000000..0bd6b3fb
+index 0000000..0bd6b3f
 --- /dev/null
 +++ b/utils/_variables.sh
 @@ -0,0 +1,23 @@
@@ -3056,7 +3056,7 @@ index 00000000..0bd6b3fb
 +SERVICE_FILE=$BINARY_NAME.service
 diff --git a/utils/backup/README.md b/utils/backup/README.md
 new file mode 100644
-index 00000000..11e65557
+index 0000000..11e6555
 --- /dev/null
 +++ b/utils/backup/README.md
 @@ -0,0 +1,11 @@
@@ -3073,7 +3073,7 @@ index 00000000..11e65557
 +> _[backup_dir_path]_ is optional (defaults: to a directory in the $HOME folder with a _unique_ name based on the system's current time).
 diff --git a/utils/backup/create.sh b/utils/backup/create.sh
 new file mode 100644
-index 00000000..cf9c54c6
+index 0000000..cf9c54c
 --- /dev/null
 +++ b/utils/backup/create.sh
 @@ -0,0 +1,77 @@
@@ -3157,7 +3157,7 @@ index 00000000..cf9c54c6
 \ No newline at end of file
 diff --git a/utils/fetch/README.md b/utils/fetch/README.md
 new file mode 100644
-index 00000000..3c1bc390
+index 0000000..3c1bc39
 --- /dev/null
 +++ b/utils/fetch/README.md
 @@ -0,0 +1,25 @@
@@ -3188,7 +3188,7 @@ index 00000000..3c1bc390
 +```
 diff --git a/utils/fetch/peers.sh b/utils/fetch/peers.sh
 new file mode 100644
-index 00000000..3a7168e5
+index 0000000..3a7168e
 --- /dev/null
 +++ b/utils/fetch/peers.sh
 @@ -0,0 +1,16 @@
@@ -3211,7 +3211,7 @@ index 00000000..3a7168e5
 \ No newline at end of file
 diff --git a/utils/fetch/rpcs.sh b/utils/fetch/rpcs.sh
 new file mode 100644
-index 00000000..2881be17
+index 0000000..2881be1
 --- /dev/null
 +++ b/utils/fetch/rpcs.sh
 @@ -0,0 +1,18 @@
@@ -3236,7 +3236,7 @@ index 00000000..2881be17
 \ No newline at end of file
 diff --git a/utils/fetch/state.sh b/utils/fetch/state.sh
 new file mode 100644
-index 00000000..d64efd8d
+index 0000000..d64efd8
 --- /dev/null
 +++ b/utils/fetch/state.sh
 @@ -0,0 +1,10 @@
@@ -3253,7 +3253,7 @@ index 00000000..d64efd8d
 \ No newline at end of file
 diff --git a/utils/info/README.md b/utils/info/README.md
 new file mode 100644
-index 00000000..38d3c6dc
+index 0000000..38d3c6d
 --- /dev/null
 +++ b/utils/info/README.md
 @@ -0,0 +1,13 @@
@@ -3272,7 +3272,7 @@ index 00000000..38d3c6dc
 +> Add a --local flag to echo a local IP address, instead of your (public) external address.
 diff --git a/utils/info/my-peer.sh b/utils/info/my-peer.sh
 new file mode 100644
-index 00000000..d09cce43
+index 0000000..d09cce4
 --- /dev/null
 +++ b/utils/info/my-peer.sh
 @@ -0,0 +1,17 @@
@@ -3296,7 +3296,7 @@ index 00000000..d09cce43
 \ No newline at end of file
 diff --git a/utils/key/README.md b/utils/key/README.md
 new file mode 100644
-index 00000000..e064b48e
+index 0000000..e064b48
 --- /dev/null
 +++ b/utils/key/README.md
 @@ -0,0 +1,17 @@
@@ -3319,7 +3319,7 @@ index 00000000..e064b48e
 +```
 diff --git a/utils/key/create.sh b/utils/key/create.sh
 new file mode 100644
-index 00000000..2b2ec53e
+index 0000000..2b2ec53
 --- /dev/null
 +++ b/utils/key/create.sh
 @@ -0,0 +1,17 @@
@@ -3343,7 +3343,7 @@ index 00000000..2b2ec53e
 \ No newline at end of file
 diff --git a/utils/key/import.sh b/utils/key/import.sh
 new file mode 100644
-index 00000000..9e1edd1a
+index 0000000..9e1edd1
 --- /dev/null
 +++ b/utils/key/import.sh
 @@ -0,0 +1,18 @@
@@ -3368,7 +3368,7 @@ index 00000000..9e1edd1a
 \ No newline at end of file
 diff --git a/utils/service/README.md b/utils/service/README.md
 new file mode 100644
-index 00000000..d57278cc
+index 0000000..d57278c
 --- /dev/null
 +++ b/utils/service/README.md
 @@ -0,0 +1,17 @@
@@ -3391,7 +3391,7 @@ index 00000000..d57278cc
 +```
 diff --git a/utils/service/install.sh b/utils/service/install.sh
 new file mode 100644
-index 00000000..0b4840b7
+index 0000000..0b4840b
 --- /dev/null
 +++ b/utils/service/install.sh
 @@ -0,0 +1,12 @@
@@ -3410,7 +3410,7 @@ index 00000000..0b4840b7
 \ No newline at end of file
 diff --git a/utils/service/uninstall.sh b/utils/service/uninstall.sh
 new file mode 100644
-index 00000000..5484a917
+index 0000000..5484a91
 --- /dev/null
 +++ b/utils/service/uninstall.sh
 @@ -0,0 +1,12 @@
@@ -3429,7 +3429,7 @@ index 00000000..5484a917
 \ No newline at end of file
 diff --git a/utils/tools/README.md b/utils/tools/README.md
 new file mode 100644
-index 00000000..c003b0cc
+index 0000000..c003b0c
 --- /dev/null
 +++ b/utils/tools/README.md
 @@ -0,0 +1,31 @@
@@ -3466,7 +3466,7 @@ index 00000000..c003b0cc
 +> <port_increment_value> is how much you would like to increment the value of the ports based on the default port values.
 diff --git a/utils/tools/port-shifter.sh b/utils/tools/port-shifter.sh
 new file mode 100644
-index 00000000..405236c3
+index 0000000..405236c
 --- /dev/null
 +++ b/utils/tools/port-shifter.sh
 @@ -0,0 +1,37 @@
@@ -3509,7 +3509,7 @@ index 00000000..405236c3
 +exit $RESULT
 diff --git a/utils/tools/restate-sync.sh b/utils/tools/restate-sync.sh
 new file mode 100644
-index 00000000..ce29412c
+index 0000000..ce29412
 --- /dev/null
 +++ b/utils/tools/restate-sync.sh
 @@ -0,0 +1,38 @@
@@ -3552,5 +3552,5 @@ index 00000000..ce29412c
 +# Exit the script with the captured exit status, indicating success (0) or failure (non-zero)
 +exit $RESULT
 -- 
-2.25.1
+2.43.0
 
