@@ -13,7 +13,7 @@
 }:
 let
   version = "v1.3.3";
-  pname = "cronosd";
+  pname = "genesisdd";
   tags = [
     "ledger"
     "netgo"
