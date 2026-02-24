@@ -12,7 +12,7 @@
 }:
 let
   version = "v1.2.2";
-  pname = "cronosd";
+  pname = "genesisd";
   tags = [ "ledger" "netgo" network "rocksdb" "grocksdb_no_link" ] ++ lib.optionals nativeByteOrder [ "nativebyteorder" ];
   ldflags = lib.concatStringsSep "\n" ([
     "-X github.com/cosmos/cosmos-sdk/version.Name=cronos"
