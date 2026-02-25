@@ -40,7 +40,7 @@ var ContractMigrations = map[string][]contractMigration{
 }
 
 func (app *App) RegisterUpgradeHandlers(cdc codec.BinaryCodec, clientKeeper clientkeeper.Keeper) {
-	planName := "v1.3"
+	planName := "v1.3.0"
 	app.UpgradeKeeper.SetUpgradeHandler(planName, func(ctx sdk.Context, _ upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
 		m, err := app.mm.RunMigrations(ctx, app.configurator, fromVM)
 		if err != nil {
